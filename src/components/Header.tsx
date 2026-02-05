@@ -26,6 +26,31 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Manual Scroll Function for Mobile
+  const handleMobileClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault(); // Default jump roko
+    
+    const targetId = href.replace("#", "");
+    const elem = document.getElementById(targetId);
+    
+    // 1. Pehle menu band karo
+    setIsMobileMenuOpen(false);
+
+    // 2. Thoda delay dekar scroll karo (Animation finish hone ke liye)
+    if (elem) {
+      setTimeout(() => {
+        const offset = 80; // Header height ka gap
+        const elementPosition = elem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }, 300); // Framer motion exit animation ke liye perfect delay
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -81,27 +106,34 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Content */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-t border-border"
+            transition={{ duration: 0.3 }}
+            className="lg:hidden bg-background border-t border-border overflow-hidden absolute top-full left-0 right-0 shadow-xl"
+            style={{ zIndex: 100 }}
           >
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="px-4 py-3 text-foreground font-medium rounded-lg hover:bg-secondary transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-4 py-3 text-foreground font-medium rounded-lg hover:bg-secondary transition-colors active:bg-accent/20"
+                  onClick={(e) => handleMobileClick(e, link.href)}
                 >
                   {link.name}
                 </a>
               ))}
-              <Button variant="accent" size="lg" className="mt-4">
+              <Button 
+                variant="accent" 
+                size="lg" 
+                className="mt-4"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 Get a Free Quote
               </Button>
             </nav>
