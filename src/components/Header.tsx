@@ -26,17 +26,14 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Manual Scroll Function for Mobile
-  const handleMobileClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault(); // Default jump roko
+  // Universal Scroll Function for CTA Buttons
+  const scrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const elem = document.getElementById("contact");
     
-    const targetId = href.replace("#", "");
-    const elem = document.getElementById(targetId);
-    
-    // 1. Pehle menu band karo
+    // Pehle mobile menu band karo agar khula hai
     setIsMobileMenuOpen(false);
 
-    // 2. Thoda delay dekar scroll karo (Animation finish hone ke liye)
     if (elem) {
       setTimeout(() => {
         const offset = 80; // Header height ka gap
@@ -47,7 +44,29 @@ const Header = () => {
           top: offsetPosition,
           behavior: "smooth"
         });
-      }, 300); // Framer motion exit animation ke liye perfect delay
+      }, isMobileMenuOpen ? 300 : 0); // Agar menu khula tha toh delay do, varna turant scroll
+    }
+  };
+
+  // Manual Scroll Function for Nav Links
+  const handleMobileClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const elem = document.getElementById(targetId);
+    
+    setIsMobileMenuOpen(false);
+
+    if (elem) {
+      setTimeout(() => {
+        const offset = 80;
+        const elementPosition = elem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }, 300);
     }
   };
 
@@ -87,9 +106,9 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* CTA Button */}
+        {/* Desktop CTA Button */}
         <div className="hidden lg:flex items-center gap-4">
-          <Button variant="accent" size="lg">
+          <Button variant="accent" size="lg" onClick={scrollToContact}>
             Get a Free Quote
           </Button>
         </div>
@@ -128,11 +147,12 @@ const Header = () => {
                   {link.name}
                 </a>
               ))}
+              {/* Mobile CTA Button */}
               <Button 
                 variant="accent" 
                 size="lg" 
                 className="mt-4"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={scrollToContact}
               >
                 Get a Free Quote
               </Button>
