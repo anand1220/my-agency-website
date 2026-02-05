@@ -112,15 +112,15 @@ const ChartTooltipContent = React.forwardRef<
       active,
       payload = [],
       className,
-      indicator = "dot",
-      hideLabel = false,
-      hideIndicator = false,
-      label,
-      labelFormatter,
-      formatter,
+      indicator: _indicator = "dot", // added _
+      hideLabel: _hideLabel = false, // added _
+      hideIndicator: _hideIndicator = false, // added _
+      label: _label, // added _
+      labelFormatter: _labelFormatter, // added _
+      formatter: _formatter, // added _
       color,
       nameKey,
-      labelKey,
+      labelKey: _labelKey, // added _
     },
     ref,
   ) => {
@@ -145,7 +145,7 @@ const ChartTooltipContent = React.forwardRef<
 
             return (
               <div key={index} className="flex items-center gap-2">
-                {!hideIndicator && (
+                {!_hideIndicator && (
                   <div
                     className="h-2.5 w-2.5 rounded-sm"
                     style={{ backgroundColor: indicatorColor }}
