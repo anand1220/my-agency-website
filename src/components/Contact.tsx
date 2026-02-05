@@ -20,47 +20,55 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // --- Web3Forms Integration ---
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: "7eb72f0d-466f-4d2c-8c34-4a564162112c", // <--- APNI KEY YAHAN DAALEIN
-        name: formData.name,
-        email: formData.email,
-        subject: `New Inquiry: ${formData.service}`,
-        message: formData.message,
-      }),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you within 24 hours.",
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "7eb72f0d-466f-4d2c-8c34-4a564162112c",
+          name: formData.name,
+          email: formData.email,
+          subject: `New Inquiry from ${formData.name}: ${formData.service}`,
+          message: formData.message,
+          from_name: "Nexus Agency Website",
+        }),
       });
-      setFormData({ name: "", email: "", service: "", message: "" });
-    } else {
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you within 24 hours.",
+        });
+        // Reset form after success
+        setFormData({ name: "", email: "", service: "", message: "" });
+      } else {
+        toast({
+          title: "Error!",
+          description: result.message || "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
       toast({
-        title: "Error!",
-        description: "Something went wrong. Please try again later.",
+        title: "Submission failed",
+        description: "Check your internet connection and try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
   };
 
   return (
     <section id="contact" className="py-24 bg-section-light">
-      {/* ... Baki pura UI code same rahega ... */}
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Contact Info (Same as before) */}
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -90,7 +98,41 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-              {/* Phone and Map items also same... */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-accent-foreground" />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground">Call Us</div>
+                  <a href="tel:+1234567890" className="text-foreground font-medium hover:text-accent transition-colors">
+                    +1 (234) 567-890
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-accent-foreground" />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground">Visit Us</div>
+                  <span className="text-foreground font-medium">
+                    123 Creative Street, Design City, DC 12345
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-gradient-primary text-primary-foreground">
+              <h3 className="font-display text-xl font-bold mb-2">
+                Prefer a quick chat?
+              </h3>
+              <p className="text-primary-foreground/80 mb-4">
+                Book a free 30-minute consultation call with our team.
+              </p>
+              <Button variant="hero-secondary" className="group">
+                Book a Consultation
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
             </div>
           </motion.div>
 
