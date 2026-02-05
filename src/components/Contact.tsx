@@ -94,7 +94,7 @@ const Contact = () => {
                 <div>
                   <div className="text-sm text-muted-foreground">Email Us</div>
                   <a href="mailto:hello@nexuscreative.com" className="text-foreground font-medium hover:text-accent transition-colors">
-                    hello@nexuscreative.com
+                    ak3332437@gmail.com
                   </a>
                 </div>
               </div>
@@ -105,7 +105,7 @@ const Contact = () => {
                 <div>
                   <div className="text-sm text-muted-foreground">Call Us</div>
                   <a href="tel:+1234567890" className="text-foreground font-medium hover:text-accent transition-colors">
-                    +1 (234) 567-890
+                    +91 7876744430
                   </a>
                 </div>
               </div>
@@ -116,7 +116,7 @@ const Contact = () => {
                 <div>
                   <div className="text-sm text-muted-foreground">Visit Us</div>
                   <span className="text-foreground font-medium">
-                    123 Creative Street, Design City, DC 12345
+                    Ranchi,Jharkhand
                   </span>
                 </div>
               </div>

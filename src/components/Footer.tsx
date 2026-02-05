@@ -77,7 +77,7 @@ const Footer = () => {
                   N
                 </span>
               </div>
-              <span className="font-display font-bold text-xl">Nexus</span>
+              <span className="font-display font-bold text-xl">A Digital Labs</span>
             </a>
             <p className="text-primary-foreground/70 text-sm mb-6">
               Building digital success stories through innovative design,

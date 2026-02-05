@@ -6,7 +6,7 @@ const plans = [
   {
     name: "Starter",
     icon: Zap,
-    price: "$997",
+    price: "₹5000",
     description: "Perfect for small businesses just getting started online.",
     features: [
       "5-page responsive website",
@@ -22,7 +22,7 @@ const plans = [
   {
     name: "Professional",
     icon: Star,
-    price: "$2,497",
+    price: "₹10000",
     description: "Ideal for growing businesses ready to scale their presence.",
     features: [
       "10-page custom website",

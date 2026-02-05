@@ -85,7 +85,7 @@ const Header = () => {
             <span className="text-accent-foreground font-display font-bold text-xl">N</span>
           </div>
           <span className={`font-display font-bold text-xl transition-colors ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}>
-            Nexus
+            A Digital Labs
           </span>
         </a>
 
