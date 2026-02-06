@@ -102,7 +102,7 @@ const Hero = () => {
               { value: "150+", label: "Projects Delivered" },
               { value: "50+", label: "Happy Clients" },
               { value: "5+", label: "Years Experience" },
-              { value: "98%", label: "Client Satisfaction" },
+              { value: "100%", label: "Client Satisfaction" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="font-display text-3xl sm:text-4xl font-bold text-accent mb-1">

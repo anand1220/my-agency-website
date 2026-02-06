@@ -116,7 +116,7 @@ const Contact = () => {
                 <div>
                   <div className="text-sm text-muted-foreground">Visit Us</div>
                   <span className="text-foreground font-medium">
-                    Ranchi,Jharkhand
+                    Kangra, Himachal Pradesh
                   </span>
                 </div>
               </div>
