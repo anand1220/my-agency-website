@@ -8,7 +8,7 @@ const testimonials = [
     name: "Sarah Johnson",
     role: "CEO, TechFlow Inc.",
     content:
-      "Nexus Creative transformed our outdated website into a conversion machine. We saw a 180% increase in leads within the first three months. Their attention to detail and strategic approach is unmatched.",
+      "Digital Lab Creative transformed our outdated website into a conversion machine. We saw a 180% increase in leads within the first three months. Their attention to detail and strategic approach is unmatched.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
   },
